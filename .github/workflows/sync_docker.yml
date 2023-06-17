@@ -29,4 +29,4 @@ jobs:
           context: .
           file: ./Dockerfile
           push: true
-          tags: 23233/netEaseApi:latest
+          tags: 23233/wyapi:latest
