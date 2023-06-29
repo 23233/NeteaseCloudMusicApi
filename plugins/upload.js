@@ -8,6 +8,8 @@ module.exports = async (query, request) => {
     nos_product: 0,
     return_body: `{"code":200,"size":"$(ObjectSize)"}`,
     type: 'other',
+    // 2023年6月29日 fix 404 code
+    csrf_token: query.csrf_token,
   }
   //   获取key和token
   const res = await request(
