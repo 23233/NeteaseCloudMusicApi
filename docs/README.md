@@ -2708,7 +2708,13 @@ pc: 云盘歌曲信息，如果不存在该字段，则为非云盘歌曲
 
 **接口地址 :** `/program/recommend`
 
-**调用例子 :** `/program/recommend`
+**可选参数 :**  
+`limit`: 取出数量 , 默认为 10
+
+`offset`: 偏移数量 , 用于分页 , 如 :( 页数 -1)\*10, 其中 10 为 limit 的值 , 默认
+为 0
+
+**调用例子 :** `/program/recommend?limit=5`
 
 ### 独家放送(入口列表)
 
@@ -4108,6 +4114,11 @@ type='1009' 获取其 id, 如`/search?keywords= 代码时间 &type=1009`
 
 **调用例子:** `/style/artist?tagId=1000`
 
+### 云村星评馆 - 简要评论
+
+说明: 调用此接口可以获取首页推荐的星评馆评论信息
+
+**接口地址:** `/starpick/comments/summary`
 
 ## 离线访问此文档
 
