@@ -25,16 +25,26 @@ const weapi = (object) => {
   const secretKey = crypto
     .randomBytes(16)
     .map((n) => base62.charAt(n % 62).charCodeAt())
+
+  const params = aesEncrypt(Buffer.from(text), 'cbc', presetKey, iv).toString(
+    'base64',
+  )
+  const p2 = aesEncrypt(Buffer.from(params), 'cbc', secretKey, iv).toString(
+    'base64',
+  )
+
+  const revSec = secretKey.reverse()
+
+  const enc = rsaEncrypt(revSec, publicKey).toString('hex')
+
+  console.log('secretKey', secretKey.toString())
+  console.log('revSec', revSec.toString())
+  console.log('params', params)
+  console.log('p2', p2)
+  console.log('enc', enc)
   return {
-    params: aesEncrypt(
-      Buffer.from(
-        aesEncrypt(Buffer.from(text), 'cbc', presetKey, iv).toString('base64'),
-      ),
-      'cbc',
-      secretKey,
-      iv,
-    ).toString('base64'),
-    encSecKey: rsaEncrypt(secretKey.reverse(), publicKey).toString('hex'),
+    params: p2,
+    encSecKey: enc,
   }
 }
 

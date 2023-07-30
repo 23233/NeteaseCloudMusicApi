@@ -87,6 +87,7 @@ const createRequest = (method, url, data = {}, options) => {
     if (options.crypto === 'weapi') {
       let csrfToken = (headers['Cookie'] || '').match(/_csrf=([^(;|$)]+)/)
       data.csrf_token = csrfToken ? csrfToken[1] : ''
+      console.log('weapi 参数', data)
       data = encrypt.weapi(data)
       url = url.replace(/\w*api/, 'weapi')
     } else if (options.crypto === 'linuxapi') {
@@ -137,6 +138,7 @@ const createRequest = (method, url, data = {}, options) => {
       httpAgent: new http.Agent({ keepAlive: true }),
       httpsAgent: new https.Agent({ keepAlive: true }),
     }
+    console.log('请求体', settings)
 
     if (options.crypto === 'eapi') settings.encoding = null
 
