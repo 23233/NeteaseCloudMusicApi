@@ -71,6 +71,7 @@
     "pac-proxy-agent": "^7.0.0",
     "qrcode": "^1.4.4",
     "safe-decode-uri-component": "^1.2.1",
+    "socks-proxy-agent": "^8.0.1",
     "tunnel": "^0.0.6",
     "yargs": "^17.1.1"
   },

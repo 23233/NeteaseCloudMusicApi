@@ -5,6 +5,7 @@ const { PacProxyAgent } = require('pac-proxy-agent')
 const http = require('http')
 const https = require('https')
 const tunnel = require('tunnel')
+const { SocksProxyAgent } = require('socks-proxy-agent')
 const { URLSearchParams, URL } = require('url')
 const config = require('../util/config.json')
 // request.debug = true // 开启可看到更详细信息
@@ -146,7 +147,7 @@ const createRequest = (method, url, data = {}, options) => {
       if (options.proxy.indexOf('pac') > -1) {
         settings.httpAgent = new PacProxyAgent(options.proxy)
         settings.httpsAgent = new PacProxyAgent(options.proxy)
-      } else {
+      } else if (options.proxy.startsWith('http')) {
         const purl = new URL(options.proxy)
         if (purl.hostname) {
           const agent = tunnel.httpsOverHttp({
@@ -161,6 +162,11 @@ const createRequest = (method, url, data = {}, options) => {
         } else {
           console.error('代理配置无效,不使用代理')
         }
+      } else if (options.proxy.startsWith('sock')) {
+        settings.httpAgent = new SocksProxyAgent(options.proxy)
+        settings.httpsAgent = new SocksProxyAgent(options.proxy)
+      } else {
+        console.error('代理类型匹配失败')
       }
     } else {
       settings.proxy = false

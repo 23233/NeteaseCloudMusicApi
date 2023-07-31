@@ -3245,7 +3245,7 @@ smart-buffer@^4.2.0:
 
 socks-proxy-agent@^8.0.1:
   version "8.0.1"
-  resolved "https://registry.npmjs.org/socks-proxy-agent/-/socks-proxy-agent-8.0.1.tgz"
+  resolved "https://registry.npmmirror.com/socks-proxy-agent/-/socks-proxy-agent-8.0.1.tgz#ffc5859a66dac89b0c4dab90253b96705f3e7120"
   integrity sha512-59EjPbbgg8U3x62hhKOFVAmySQUcfRQ4C7Q/D5sEHnZTQRrQlNKINks44DMR1gwXp0p4LaVIeccX2KHTTcHVqQ==
   dependencies:
     agent-base "^7.0.1"
