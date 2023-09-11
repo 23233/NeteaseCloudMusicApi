@@ -270,6 +270,12 @@
 252. 曲风-歌手
 253. 私信和通知接口
 254. 回忆坐标
+255. 播客搜索
+256. 播客声音上传
+257. 验证接口-二维码生成
+258. 验证接口-二维码检测
+259. 听歌识曲
+260. 根据nickname获取userid接口
 
 ## 安装
 
@@ -1063,11 +1069,11 @@ tags: 歌单标签
 
 ### 分享文本、歌曲、歌单、mv、电台、电台节目到动态
 
-说明 : 登录后调用此接口 ,可以分享文本、歌曲、歌单、mv、电台、电台节目到动态
+说明 : 登录后调用此接口 ,可以分享文本、歌曲、歌单、mv、电台、电台节目,专辑到动态
 
 **必选参数 :** `id` : 资源 id （歌曲，歌单，mv，电台，电台节目对应 id）
 
-**可选参数 :** `type`: 资源类型，默认歌曲 song，可传 `song`,`playlist`,`mv`,`djradio`,`djprogram`
+**可选参数 :** `type`: 资源类型，默认歌曲 song，可传 `song`,`playlist`,`mv`,`djradio`,`djprogram`, `album`
 
 `msg`: 内容，140 字限制，支持 emoji，@用户名（`/user/follows`接口获取的用户名，用户名后和内容应该有空格），图片暂不支持
 
@@ -1258,7 +1264,13 @@ tags: 歌单标签
 
 ### 收藏的歌手列表
 
-说明 : 调用此接口,可获取收藏的歌手列表
+说明 : 调用此接口,可获取收藏的歌手列表  
+
+**可选参数 :**
+
+`limit`: 取出歌单数量 , 默认为 25
+
+`offset`: 偏移数量 , 用于分页 , 如 :( 评论页数 -1)\*25, 其中 25 为 limit 的值
 
 **接口地址 :** `/artist/sublist`
 
@@ -4152,6 +4164,111 @@ type='1009' 获取其 id, 如`/search?keywords= 代码时间 &type=1009`
 **接口地址:** `/music/first/listen/info`
 
 **必选参数：** `id` : 歌曲 ID
+
+### 播客列表
+
+说明: 可以获取播客列表
+
+**接口地址:** `/voicelist/search`
+
+**可选参数：** 
+
+`limit`: 取出歌单数量 , 默认为 200
+
+`offset`: 偏移数量 , 用于分页 , 如 :( 评论页数 -1)\*200, 其中 200 为 limit 的值
+
+`podcastName`: 播客名称
+
+### 播客上传声音
+说明: 可以上传声音到播客,例子在 `/public/voice_upload.html` 访问地址: <a href="/voice_upload.html" target="_blank">/voice_upload.html</a>
+
+**接口地址:** `/voice/upload`
+
+**必选参数：** 
+`voiceListId`: 播客 id  
+
+`coverImgId`: 播客封面  
+
+`categoryId`: 分类id  
+
+`secondCategoryId`:次级分类id  
+
+`description`: 声音介绍
+
+
+**可选参数：** 
+`songName`: 声音名称
+
+`privacy`: 设为隐私声音,播客如果是隐私博客,则必须设为1
+
+`publishTime`:默认立即发布,定时发布的话需传入时间戳
+
+`autoPublish`: 是否发布动态,是则传入1
+
+`autoPublishText`: 动态文案
+
+`orderNo`: 排序,默认为1
+
+`composedSongs`: 包含歌曲(歌曲id),多个用逗号隔开
+
+### 验证接口-二维码生成
+说明: 进行某些操作,如关注用户,可能会触发验证,可调用这个接口生成二维码,使用app扫码后可解除验证  
+
+**接口地址:** `/verify/getQr`
+
+**必选参数：**   
+
+`vid`: 触发验证后,接口返回的verifyId  
+
+`type`:触发验证后,接口返回的verifyType  
+
+`token`:触发验证后,接口返回的verifyToken  
+
+`evid`:触发验证后,接口返回的params的event_id  
+
+`sign`:触发验证后,接口返回的params的sign
+
+### 验证接口-二维码检测
+说明: 使用此接口,传入`/verify/getQr`接口返回的`qr`字符串,可检测二维码扫描状态
+
+**接口地址:** `/verify/qrcodestatus`
+
+**必选参数：**   
+
+`qr`: `/verify/getQr`接口返回的`qr`字符串
+
+返回结果说明:
+
+qrCodeStatus:0,detailReason:0 二维码生成成功
+
+qrCodeStatus:0,detailReason:303 账号不一致
+
+qrCodeStatus:10,detailReason:0  二维码已扫描,并且手机号相同
+
+qrCodeStatus:20,detailReason:0  验证成功qrCodeStatus:21,detailReason:0 二维码已失效
+
+### 听歌识曲
+说明: 使用此接口,上传音频文件或者麦克风采集声音可识别对应歌曲信息,具体调用例子参考 `/audio_match_demo/index.html` (项目文件: `public/audio_match_demo/index.html`)
+
+**接口地址:** `/audio/match`
+
+**必选参数：**     
+
+`duration`: 音频时长,单位秒
+
+`audioFP`: 音频指纹,参考项目调用例子获取
+
+### 根据nickname获取userid
+说明: 使用此接口,传入用户昵称,可获取对应的用户id,支持批量获取,多个昵称用`分号(;)`隔开  
+
+**必选参数：**  
+
+`nicknames`: 用户昵称,多个用分号(;)隔开
+
+**接口地址:** `/user/nickname`
+
+**调用例子:** `/get/userids?nicknames=binaryify` `/get/userids?nicknames=binaryify;binaryify2`
+
 
 ## 离线访问此文档
 
