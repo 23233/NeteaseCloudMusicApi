@@ -1,19 +1,19 @@
-// 乐谱列表
+// 每日推荐歌曲-不感兴趣
 module.exports = (query, request) => {
   const data = {
-    id: query.id,
-    abTest: query.ab || 'b',
+    resId: query.id, // 日推歌曲id
+    resType: 4,
+    sceneType: 1,
   }
   return request(
     'POST',
-    `https://interface3.music.163.com/eapi/music/sheet/list/v1`,
+    `https://music.163.com/weapi/v2/discovery/recommend/dislike`,
     data,
     {
-      crypto: 'eapi',
+      crypto: 'weapi',
       cookie: query.cookie,
       proxy: query.proxy,
       realIP: query.realIP,
-      url: '/api/music/sheet/list/v1',
     },
   )
 }

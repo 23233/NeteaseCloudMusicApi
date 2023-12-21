@@ -396,6 +396,16 @@ banner({ type:0 }).then(res=>{
 258. 验证接口-二维码检测
 259. 听歌识曲
 260. 根据nickname获取userid接口
+261. 播客声音列表
+262. 专辑简要百科信息
+263. 歌曲简要百科信息
+264. 歌手简要百科信息
+265. mv简要百科信息
+266. 搜索歌手
+267. 用户贡献内容
+268. 用户贡献条目、积分、云贝数量
+269. 年度听歌报告
+270. 播客声音搜索
 
 ## 更新日志
 
@@ -412,10 +422,12 @@ $ npm test
 
 ## SDK
 
-| 语言 |                    作者                     |                             地址                             |  类型  |
-| :--: | :-----------------------------------------: | :----------------------------------------------------------: | :----: |
-| Java |    [JackuXL](https://github.com/JackuXL)    | [https://github.com/JackuXL/NeteaseCloudMusicApi-SDK](https://github.com/JackuXL/NeteaseCloudMusicApi-SDK) | 第三方 |
-| Java | [1015770492](https://github.com/1015770492) |       https://github.com/1015770492/yumbo-music-utils        | 第三方 |
+| 语言   |                    作者                     |                             地址                             |  类型  |
+| :--:   | :-----------------------------------------: | :----------------------------------------------------------: | :----: |
+| Java   |    [JackuXL](https://github.com/JackuXL)    | [https://github.com/JackuXL/NeteaseCloudMusicApi-SDK](https://github.com/JackuXL/NeteaseCloudMusicApi-SDK) | 第三方 |
+| Java   | [1015770492](https://github.com/1015770492) |       https://github.com/1015770492/yumbo-music-utils        | 第三方 |
+| Python |    [盧瞳](https://github.com/2061360308)    |  [NeteaseCloudMusic_PythonSDK](https://github.com/2061360308/NeteaseCloudMusic_PythonSDK)  | 第三方 |
+
 
 ## 贡献者
 
