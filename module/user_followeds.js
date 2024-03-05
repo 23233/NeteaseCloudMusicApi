@@ -3,7 +3,7 @@
 module.exports = (query, request) => {
   const data = {
     userId: query.uid,
-    time: '0',
+    time: query.time || '0',
     limit: query.limit || 30,
     offset: query.offset || 0,
     getcounts: 'true',
